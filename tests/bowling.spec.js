@@ -35,8 +35,8 @@ var goodBowl = [  { ball1: 10,
                   },
                   { ball1: 5,
                     ball2: 5,
-                    spare: false,
-                    strike: true
+                    spare: true,
+                    strike: false
                   },
                   { ball1: 0,
                     ball2: 10,
@@ -128,13 +128,14 @@ describe("add", function(){
   });
 
   it("should be able to determine if a frame was a strike and award bonus points", function(){
-    expect(bowling(goodBowl)).to.equal(75);
+    expect(bowling(goodBowl)).to.equal(65);
     expect(bowling(strikeBowl)).to.equal(70);
     expect(bowling(spareBowl)).to.equal(68);
 
   });
 
+  it.skip ("should be able to apply award bonus to the last (tenth) frame", function(){
 
-
+  });
 
 });
