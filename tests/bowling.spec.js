@@ -35,7 +35,7 @@ var goodBowl = [  { ball1: 10,
                   },
                   { ball1: 5,
                     ball2: 5,
-                    spare: true,
+                    spare: false,
                     strike: true
                   },
                   { ball1: 0,
@@ -122,8 +122,7 @@ describe("add", function(){
     expect(bowling(twoFrames)).to.equal(10);
   });
 
-  it("should be able to determine if a frame was a spare and award bonus points", function(){
-    expect(bowling(goodBowl)).to.equal(75);
+  it("should be able to determine if a frame is a spare and award bonus points", function(){
     expect(bowling(spareBowl)).to.equal(68);
 
   });

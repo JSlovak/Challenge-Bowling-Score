@@ -5,23 +5,41 @@ module.exports = function(frames) {
   var score = 0;
 
   for (var i= 0; i < frames.length; i++){
-
+    var isNotScoreObject = !(frames[i].hasOwnProperty("ball1")) || !(frames[i].hasOwnProperty("ball2")) || !(frames[i].hasOwnProperty("strike"))|| !(frames[i].hasOwnProperty("spare"));
     var frameScore = frames[i].ball1 + frames[i].ball2;
 
-    if (!(frames[i].hasOwnProperty("ball1")) || !(frames[i].hasOwnProperty("ball2")) || !(frames[i].hasOwnProperty("strike"))|| !(frames[i].hasOwnProperty("spare"))){
+
+    if (isNotScoreObject){
       throw new Error ("We are not able to get your score. Maybe get a beer? ");
     }
 
-    if ( frame[i].strike === true){
+    if (frames[i].spare === true){
+      var spareBonus = frames[i+1].ball1;
+
       score += frameScore;
-
-    }
-    if (frame[i].spare === false){
-
+      score += spareBonus;
     }
 
+    if (frames[i].strike === true){
+      if (frames[i+1].strike === true){
+        var strikeBonusStrikes = frames[i+1].ball1 + frames[i+2].ball1;
+        console.log(frameScore);
+        console.log(strikeBonusStrikes);
+        frameScore += strikeBonusStrikes;
+        console.log(frameScore);
+      }
+
+      if(frames[i+1].strike !== true){
+        var strikeBonus = frames[i+1].ball1 + frames[i+1].ball2;
+        frameScore += strikeBonus;
+      }
+      score += frameScore;
+    }
+
+    if (frames[i].spare !== true && frames[i].strike !== true){
     score += frameScore;
-  }
 
+    }
+  }
   return score;
 };
